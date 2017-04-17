@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>People List</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="../static/css/styles.css" th:href="@{css/styles.css}"/>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="index.html" th:href="@{/}">Home</a></li>
+        <li><a href="personForm.html" th:href="@{/personForm}">Add Person</a></li>
+    </ul>
+</nav>
+<!--<div th:text="${person}">body</div>-->
+<h1>People List</h1>
+
+<form action="index.html" th:action="@{/}" method="post">
+    <label>
+        <span>Search:</span>
+        <input type="text" name="search" value="" th:value="${search}" />
+    </label>
+    <button>Search</button>
+<!--</form>-->
+<!--shows the size of the list-->
+</form>
+<p>Showing <span th:text="${people.size()}"></span> people.</p>
+
+<table>
+    <tr>
+        <th>
+            <a href="index.html" title="Sort by first name">First Name</a>
+        </th>
+        <th>
+            <a href="index.html" title="Sort by first name">Last Name</a>
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+    <tr th:each="person:${people}">
+        <!--//adding th:text to show firstname and lastname not dogs-->
+        <td th:text="${person.getFirstName()}">Cosmo</td>
+        <td th:text="${person.getLastName()}">Harper</td>
+        <!--adding th href thymeleaf to add person id to show in url-->
+        <td><a href="/" th:href="@{/personForm/?personId=} + ${person.getPersonId()}">Edit</a></td>
+    </tr>
+    <tr th:remove="all">
+        <td>Raeburn</td>
+        <td>Dusty</td>
+        <td><a href="personForm.html">Edit</a></td>
+    </tr>
+    <tr th:remove="all">
+        <td>Cash</td>
+        <td>Blaze</td>
+        <td><a href="personForm.html">Edit</a></td>
+    </tr>
+    <tr th:remove="all">
+        <td>Kaiden</td>
+        <td>Dex</td>
+        <td><a href="personForm.html">Edit</a></td>
+    </tr>
+</table>
+
+</body>
+</html>
